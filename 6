@@ -1,0 +1,29 @@
+public class AES{
+
+ public static void main(String[] args) throws Exception {
+
+ var key = javax.crypto.KeyGenerator.getInstance("AES").generateKey();
+
+ var cipher = javax.crypto.Cipher.getInstance("AES");
+
+ String plainText = "Harshi";
+
+ cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, key);
+
+ String encrypted = 
+
+java.util.Base64.getEncoder().encodeToString(cipher.doFinal(plainText.getBytes()));
+
+ cipher.init(javax.crypto.Cipher.DECRYPT_MODE, key);
+
+ String decrypted = new String(cipher.doFinal(java.util.Base64.getDecoder().decode(encrypted)));
+
+ System.out.println("Original: " + plainText);
+
+ System.out.println("Encrypted: " + encrypted);
+
+ System.out.println("Decrypted: " + decrypted);
+
+ }
+
+}
