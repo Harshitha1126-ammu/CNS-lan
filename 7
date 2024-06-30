@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class RSAExample {
+
+ public static void main(String[] args) throws Exception {
+
+ Scanner scanner = new Scanner(System.in);
+
+ System.out.print("Enter the text to be encrypted: ");
+
+ String input = scanner.nextLine();
+
+ var key = java.security.KeyPairGenerator.getInstance("RSA");
+
+ key.initialize(2048);
+ var pair = key.generateKeyPair();
+
+ var cipher = javax.crypto.Cipher.getInstance("RSA");
+
+ cipher.init(javax.crypto.Cipher.ENCRYPT_MODE, pair.getPublic());
+
+ String encrypted = 
+
+java.util.Base64.getEncoder().encodeToString(cipher.doFinal(input.getBytes()));
+
+ cipher.init(javax.crypto.Cipher.DECRYPT_MODE, pair.getPrivate());
+
+ String decrypted = new String(cipher.doFinal(java.util.Base64.getDecoder().decode(encrypted)));
+
+ System.out.println("Encrypted: " + encrypted);
+
+ System.out.println("Decrypted: " + decrypted);
+
+ }
+
+}
